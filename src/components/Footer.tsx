@@ -14,7 +14,7 @@ const Footer = () => {
               Built by{" "}
               <a
                 target="_blank"
-                className="text-zinc-500 hover:text-zinc-400 dark:hover:text-zinc-800"
+                className="text-zinc-500 hover:text-primary"
                 href="https://github.com/anhxknguyen?tab=repositories"
               >
                 @Bon Nguyen

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Card.io",
@@ -23,9 +24,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <div className="px-24 grow flex justify-center">{children}</div>
-          <Footer />
+          <SessionProvider>
+            <Navbar />
+            <div className="px-24 grow flex justify-center">{children}</div>
+            <Footer />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
