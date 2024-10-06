@@ -3,10 +3,11 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Discussions",
-  description: "Discussion Post Website",
+  title: "Card.io",
+  description: "Train your brain with flashcards!",
 };
 
 export default function RootLayout({
@@ -16,7 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
       <body className="flex flex-col">
         <ThemeProvider
           attribute="class"
