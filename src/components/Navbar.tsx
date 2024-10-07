@@ -48,7 +48,7 @@ const Navbar = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {/* Study Sets */}
-                <DropdownMenuItem>
+                <DropdownMenuItem className="">
                   <Link
                     href={`/${user?.id}/study-sets`}
                     className="flex gap-4 items-center"
@@ -59,7 +59,7 @@ const Navbar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {/* Settings */}
-                <DropdownMenuItem>
+                <DropdownMenuItem className="">
                   <Link
                     href={`/${user?.id}/settings`}
                     className="flex gap-4 items-center"
@@ -68,7 +68,7 @@ const Navbar = () => {
                     Settings
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="">
                   <form
                     action={async () => {
                       await signOut();
