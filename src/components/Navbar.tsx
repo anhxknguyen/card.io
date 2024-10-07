@@ -50,7 +50,7 @@ const Navbar = () => {
                 {/* Study Sets */}
                 <DropdownMenuItem>
                   <Link
-                    href={`/${user?.email}/study-sets`}
+                    href={`/${user?.id}/study-sets`}
                     className="flex gap-4 items-center"
                   >
                     <Book className="w-4" />
@@ -61,7 +61,7 @@ const Navbar = () => {
                 {/* Settings */}
                 <DropdownMenuItem>
                   <Link
-                    href={`/${user?.email}/settings`}
+                    href={`/${user?.id}/settings`}
                     className="flex gap-4 items-center"
                   >
                     <SettingsIcon className="w-4" />
