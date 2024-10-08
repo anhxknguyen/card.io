@@ -43,7 +43,7 @@ const UserSettings = async ({ params }: { params: { userId: string } }) => {
   }
 
   return (
-    <div className="w-full pt-4">
+    <div className="w-full">
       <ChangeUsernameForm />
     </div>
   );

@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Book, LogOutIcon, SettingsIcon, Paintbrush } from "lucide-react";
+import { Book, LogOutIcon, SettingsIcon } from "lucide-react";
 import { signOut, useSession, signIn } from "next-auth/react";
 import {
   DropdownMenu,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
+import { ModeToggle } from "./ModeToggle";
 
 const Navbar = () => {
   // Get the current session
@@ -29,12 +30,9 @@ const Navbar = () => {
         <Link className="font-bold text-lg hover:text-primary" href="/">
           card.io
         </Link>
-        <div className="flex gap-2">
-          <Link href="/about">
-            <Button variant="ghost">
-              <Paintbrush style={{ width: "100%", height: "100%" }} />
-            </Button>
-          </Link>
+        <div className="flex gap-2 items-center">
+          {/* Theme Mode Toggle */}
+          <ModeToggle />
           {status === "authenticated" ? (
             // AUTHENTICATED USER
             <>
@@ -55,7 +53,7 @@ const Navbar = () => {
                   <DropdownMenuSeparator />
                   {/* Study Sets */}
                   <DropdownMenuItem
-                    onClick={() => router.push(`/${user?.id}/study-sets`)}
+                    onClick={() => router.push(`/study-sets/${user?.id}`)}
                     className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <Book className="w-4" />
@@ -64,7 +62,7 @@ const Navbar = () => {
                   <DropdownMenuSeparator />
                   {/* Settings */}
                   <DropdownMenuItem
-                    onClick={() => router.push(`/${user?.id}/settings`)}
+                    onClick={() => router.push(`/settings/${user?.id}`)}
                     className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <SettingsIcon className="w-4" />

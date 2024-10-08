@@ -3,7 +3,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 
 const About = () => {
   return (
-    <div className="h-full w-full flex justify-center items-center mt-4">
+    <div className="h-full w-full flex justify-center items-center">
       <Card className="h-fit">
         <CardHeader>
           <CardTitle>Preferences</CardTitle>
