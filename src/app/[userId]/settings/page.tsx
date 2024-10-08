@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import User from "../../../../types/User";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const UserSettings = async ({ params }: { params: { userId: string } }) => {
   //Gets user data based on auth session
@@ -23,9 +24,13 @@ const UserSettings = async ({ params }: { params: { userId: string } }) => {
     },
   });
 
-  //If user is not found, redirect to signin page
-  if (!urlUser) {
+  //If sessionUser is not found, redirect to signin page
+  if (!sessionUser) {
     redirect("/api/auth/signin?callbackUrl=/settings");
+  }
+
+  if (!urlUser) {
+    notFound();
   }
 
   //if sessionUser is not the same as urlUser, return unauthorized
