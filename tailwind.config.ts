@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        redAccent: "#d44642",
         navbar: "#09090B",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

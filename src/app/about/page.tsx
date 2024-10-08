@@ -4,12 +4,12 @@ import { ModeToggle } from "@/components/ModeToggle";
 const About = () => {
   return (
     <div className="h-full w-full flex justify-center items-center">
-      <Card className="h-fit">
+      <Card className="h-fit flex flex-col justify-center items-center w-full">
         <CardHeader>
           <CardTitle>Preferences</CardTitle>
         </CardHeader>
         <CardFooter>
-          <ModeToggle />
+          <ModeToggle label="Change Theme" />
         </CardFooter>
       </Card>
     </div>

@@ -1,6 +1,6 @@
-import StudySet from "./StudySet";
+import { StudySet } from "./StudySet";
 
-type User = {
+export interface User {
   id: string;
   name: string | null;
   username: string | null;
@@ -10,6 +10,4 @@ type User = {
   createdAt: Date;
   updatedAt: Date;
   studySets: StudySet[];
-};
-
-export default User;
+}

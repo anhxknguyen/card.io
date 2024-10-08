@@ -53,7 +53,7 @@ const Navbar = () => {
                   <DropdownMenuSeparator />
                   {/* Study Sets */}
                   <DropdownMenuItem
-                    onClick={() => router.push(`/study-sets/${user?.id}`)}
+                    onClick={() => router.push(`/my-sets/${user?.id}`)}
                     className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <Book className="w-4" />

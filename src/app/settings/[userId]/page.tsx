@@ -1,6 +1,6 @@
 import ChangeUsernameForm from "@/components/formComponents/ChangeUsernameForm";
 import prisma from "@/lib/prisma";
-import User from "../../../../types/User";
+import { User } from "../../../../types/User";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
@@ -18,6 +18,7 @@ const UserSettings = async ({ params }: { params: { userId: string } }) => {
     include: {
       studySets: {
         include: {
+          user: true,
           flashcards: true,
         },
       },
