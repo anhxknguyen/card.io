@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { onSubmit } from "./updateUsername";
+import { updateUsername } from "../../utils/updateUsername";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -55,7 +55,9 @@ const ChangeUsernameForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (data) => {
-            const isChangeUsernameSuccessful = await onSubmit(data.username);
+            const isChangeUsernameSuccessful = await updateUsername(
+              data.username
+            );
             if (!isChangeUsernameSuccessful) {
               form.setError("username", {
                 message: "Username is already taken",

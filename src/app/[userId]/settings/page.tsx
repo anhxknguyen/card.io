@@ -1,4 +1,4 @@
-import ChangeUsernameForm from "@/components/userComponents/ChangeUsernameForm";
+import ChangeUsernameForm from "@/components/formComponents/ChangeUsernameForm";
 import prisma from "@/lib/prisma";
 import User from "../../../../types/User";
 import { auth } from "@/auth";

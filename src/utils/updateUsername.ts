@@ -2,7 +2,7 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 
-export async function onSubmit(username: string) {
+export async function updateUsername(username: string) {
   const session = await auth();
   const myUser = session?.user;
 
