@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Book, LogOutIcon, Settings, SettingsIcon } from "lucide-react";
+import { Book, LogOutIcon, SettingsIcon, Paintbrush } from "lucide-react";
 import { signOut, useSession, signIn } from "next-auth/react";
 import {
   DropdownMenu,
@@ -16,6 +16,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  // Get the current session
   const { data: session, status } = useSession();
   const user = session?.user;
   const router = useRouter();
@@ -31,10 +32,11 @@ const Navbar = () => {
         <div className="flex gap-2">
           <Link href="/about">
             <Button variant="ghost">
-              <Settings style={{ width: "100%", height: "100%" }} />
+              <Paintbrush style={{ width: "100%", height: "100%" }} />
             </Button>
           </Link>
           {status === "authenticated" ? (
+            // AUTHENTICATED USER
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -81,12 +83,14 @@ const Navbar = () => {
               </DropdownMenu>
             </>
           ) : status === "loading" ? (
+            // LOADING SKELETON
             <Avatar>
               <AvatarFallback>
                 <div className="animate-pulse rounded-full w-8 h-8"></div>
               </AvatarFallback>
             </Avatar>
           ) : (
+            // UNAUTHENTICATED USER, SHOW SIGNIN BUTTON
             <Button
               onClick={async () => {
                 await signIn();

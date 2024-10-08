@@ -5,10 +5,12 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
 const UserSettings = async ({ params }: { params: { userId: string } }) => {
+  //Gets user data based on auth session
   const session = await auth();
-  const myUser = session?.user;
+  const sessionUser = session?.user;
 
-  const user: User | null = await prisma.user.findUnique({
+  //Gets user data based on URL
+  const urlUser: User | null = await prisma.user.findUnique({
     where: {
       id: params.userId,
     },
@@ -21,11 +23,13 @@ const UserSettings = async ({ params }: { params: { userId: string } }) => {
     },
   });
 
-  if (!user) {
+  //If user is not found, redirect to signin page
+  if (!urlUser) {
     redirect("/api/auth/signin?callbackUrl=/settings");
   }
 
-  if (myUser?.id !== user?.id) {
+  //if sessionUser is not the same as urlUser, return unauthorized
+  if (sessionUser?.id !== urlUser?.id) {
     return (
       <div className="flex h-full w-full justify-center items-center">
         You are unauthorized to view this page.
