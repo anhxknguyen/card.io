@@ -9,5 +9,7 @@ Libraries, Tools, and Frameworks:
 - **zod** => for form schema validation
 - **react-hook-form** => for form validation
 
+Deployments don't work right now because I haven't migrated my local db to any hosting services yet :p
+
 INSTALL DEV DEPENDENCIES
 npm install
