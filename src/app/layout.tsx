@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Card.io",
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Navbar />
             <div className="px-24 grow flex justify-center">{children}</div>
             <Footer />
+            <Toaster />
           </SessionProvider>
         </ThemeProvider>
       </body>

@@ -13,10 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
   const user = session?.user;
+  const router = useRouter();
 
   return (
     <div
@@ -33,54 +35,51 @@ const Navbar = () => {
             </Button>
           </Link>
           {status === "authenticated" ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Avatar>
-                  <AvatarFallback>
-                    {user?.name?.split(" ").map((name) => name[0])}
-                  </AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-48">
-                {/* Label */}
-                <DropdownMenuLabel>
-                  {user?.name || user?.email}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {/* Study Sets */}
-                <DropdownMenuItem className="">
-                  <Link
-                    href={`/${user?.id}/study-sets`}
-                    className="flex gap-4 items-center"
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarFallback className="bg-primary text-secondary dark:bg-secondary dark:text-white">
+                      {user?.username?.split(" ").map((name) => name[0]) ||
+                        user?.name?.split(" ").map((name) => name[0])}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48">
+                  {/* Label */}
+                  <DropdownMenuLabel>
+                    {user?.username || user?.name || user?.email}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {/* Study Sets */}
+                  <DropdownMenuItem
+                    onClick={() => router.push(`/${user?.id}/study-sets`)}
+                    className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <Book className="w-4" />
                     My Study Sets
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                {/* Settings */}
-                <DropdownMenuItem className="">
-                  <Link
-                    href={`/${user?.id}/settings`}
-                    className="flex gap-4 items-center"
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  {/* Settings */}
+                  <DropdownMenuItem
+                    onClick={() => router.push(`/${user?.id}/settings`)}
+                    className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <SettingsIcon className="w-4" />
                     Settings
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="">
-                  <form
-                    action={async () => {
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={async () => {
                       await signOut();
                     }}
-                    className="flex gap-4 items-center"
+                    className="flex gap-4 items-center hover:cursor-pointer"
                   >
                     <LogOutIcon className="w-4" />
-                    <button type="submit">Sign Out</button>
-                  </form>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    <div>Sign Out</div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
           ) : status === "loading" ? (
             <Avatar>
               <AvatarFallback>
@@ -88,15 +87,12 @@ const Navbar = () => {
               </AvatarFallback>
             </Avatar>
           ) : (
-            <Button>
-              <form
-                action={async () => {
-                  await signIn();
-                }}
-                className="flex gap-4 items-center"
-              >
-                <button type="submit">Sign In</button>
-              </form>
+            <Button
+              onClick={async () => {
+                await signIn();
+              }}
+            >
+              Sign In
             </Button>
           )}
         </div>
