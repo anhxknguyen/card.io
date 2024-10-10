@@ -1,3 +1,4 @@
+**HAVE NOT MOVED TO PRODUCTION DB YET**
 A flashcard website built using almost all of T3 stack ( without tRPC =/ )
 
 Libraries, Tools, and Frameworks:
