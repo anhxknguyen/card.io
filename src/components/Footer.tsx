@@ -6,8 +6,8 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 const Footer = () => {
   return (
-    <div className="border-t dark:border-none dark:bg-navbar bg-zinc-50">
-      <div className="h-48 max-w-screen-2xl mx-auto text-sm flex items-center px-6 justify-center">
+    <div className="border-t dark:border-none dark:bg-navbar bg-zinc-50  px-6">
+      <div className="h-24 max-w-screen-2xl mx-auto text-sm flex items-center justify-center">
         <div className="grow flex justify-center m-4">
           <div className="flex flex-col gap-2">
             <p>
@@ -51,7 +51,7 @@ const Footer = () => {
         <div className="grow flex justify-center m-4">
           <Button className="flex gap-2">
             <Sticker />
-            Send Feedback
+            <span className="hidden sm:block">Send Feedback</span>
           </Button>
         </div>
       </div>

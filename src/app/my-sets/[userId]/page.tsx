@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
 import { StudySet } from "../../../../types/StudySet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import CreateSetButton from "@/components/buttonComponents/CreateSetButton";
 
 const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
   //Gets user data based on auth session
@@ -39,6 +40,7 @@ const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
     redirect("/api/auth/signin?callbackUrl=/my-sets");
   }
 
+  //If urlUser is not found, return not found
   if (!urlUser) {
     notFound();
   }
@@ -65,12 +67,15 @@ const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
   // });
 
   return (
-    <div className="w-full flex flex-col gap-5">
-      <header>
-        <h1 className="text-2xl font-semibold">My Study Sets</h1>
+    <div className="w-full flex flex-col gap-5 px-8 sm:px-0">
+      <header className="flex flex-col gap-2">
+        <div className="flex gap-4">
+          <h1 className="text-3xl font-semibold">My Study Sets</h1>
+          <CreateSetButton variant="secondary" />
+        </div>
         <p className="text-gray-500">Create, edit, and delete study sets</p>
       </header>
-      <div className="grid grid-cols-4 gap-4 ">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 ">
         {studySets.map((studySet) => (
           <Card key={studySet.id} className="bg-secondary h-48 relative group">
             <div
@@ -96,8 +101,8 @@ const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
                 </Avatar>
                 {studySet.user.username}
               </CardDescription>
-              <CardDescription className="text-sm text-gray-500">
-                {new Date(studySet.updatedAt).toLocaleDateString()}
+              <CardDescription className="text-sm">
+                Updated {new Date(studySet.updatedAt).toLocaleDateString()}
               </CardDescription>
             </CardFooter>
           </Card>

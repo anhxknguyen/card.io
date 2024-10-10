@@ -1,9 +1,10 @@
 import { Flashcard } from "./Flashcard";
-import { User } from "./User";
 
 export interface StudySet {
   id: string;
   title: string;
+  isPublic: boolean;
+  description: string | null;
   user: {
     id: string;
     name: string | null;
@@ -18,4 +19,5 @@ export interface StudySet {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
+  accessedAt: Date | null;
 }

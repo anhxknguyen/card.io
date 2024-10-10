@@ -13,8 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { ModeToggle } from "./ModeToggle";
+import CreateSetButton from "./buttonComponents/CreateSetButton";
 
 const Navbar = () => {
   // Get the current session
@@ -31,7 +32,10 @@ const Navbar = () => {
           card.io
         </Link>
         <div className="flex gap-2 items-center">
-          {/* Theme Mode Toggle */}
+          {/* Theme Mode Toggle & Create Study Set Button*/}
+          {status === "authenticated" && (
+            <CreateSetButton label="New Study Set" />
+          )}
           <ModeToggle />
           {status === "authenticated" ? (
             // AUTHENTICATED USER
@@ -39,7 +43,7 @@ const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
-                    <AvatarFallback className="bg-primary text-secondary dark:bg-secondary dark:text-white">
+                    <AvatarFallback className="bg-gray-200 text-black dark:bg-secondary dark:text-white">
                       {user?.username?.split(" ").map((name) => name[0]) ||
                         user?.name?.split(" ").map((name) => name[0])}
                     </AvatarFallback>
@@ -70,7 +74,7 @@ const Navbar = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={async () => {
-                      await signOut();
+                      await signOut({ callbackUrl: "/", redirect: true });
                     }}
                     className="flex gap-4 items-center hover:cursor-pointer"
                   >
