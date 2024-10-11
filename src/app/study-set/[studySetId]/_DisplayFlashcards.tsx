@@ -31,9 +31,9 @@ export const DisplayFlashcards = ({ studySet }: { studySet: StudySet }) => {
   }, [api]);
 
   return (
-    <div className="w-full flex flex-col ">
+    <div className="w-full flex flex-col">
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-start">
           <Button
             type="button"
             variant={"ghost"}
@@ -44,9 +44,10 @@ export const DisplayFlashcards = ({ studySet }: { studySet: StudySet }) => {
             <ChevronLeft className="w-6" />
           </Button>
           <div className="flex items-center gap-6">
-            <h1 className="text-4xl font-bold">{studySet?.title}</h1>
+            <h1 className="text-4xl font-bold w-fit">{studySet?.title}</h1>
             {isOwner && (
               <Button
+                className="hidden sm:block"
                 type="button"
                 variant={"outline"}
                 onClick={() => {
@@ -58,15 +59,27 @@ export const DisplayFlashcards = ({ studySet }: { studySet: StudySet }) => {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2 px-16">
+        <div className="flex flex-col gap-6 px-16">
           <p>{studySet?.description}</p>
+          {isOwner && (
+            <Button
+              className="sm:hidden"
+              type="button"
+              variant={"outline"}
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              Edit
+            </Button>
+          )}
         </div>
       </div>
       <div className="grow w-full flex justify-center items-center">
         <Carousel
           setApi={setApi}
           opts={{ loop: true, watchDrag: false }}
-          className="border border-neutral-300 dark:border-border rounded-md h-2/3 bg-neutral-50 dark:bg-card w-4/5 sm:w-1/2"
+          className="border border-neutral-300 dark:border-border rounded-md h-4/5 lg:h-2/3 bg-neutral-50 dark:bg-card w-4/5 lg:w-1/2"
         >
           <CarouselPrevious />
           <CarouselContent
@@ -76,14 +89,14 @@ export const DisplayFlashcards = ({ studySet }: { studySet: StudySet }) => {
             {studySet?.flashcards.map((flashcard: Flashcard) => (
               <CarouselItem key={flashcard.id} className="h-full select-none">
                 {displayFront ? (
-                  <div className="flex flex-col relative overflow-scroll px-8 py-4 items-center sm:text-2xl text-xl lg:text-5xl h-full justify-center transition-transform duration-500">
+                  <div className="flex flex-col relative overflow-scroll px-8 py-4 items-center sm:text-4xl text-2xl lg:text-5xl h-full justify-center transition-transform duration-500">
                     <p>{flashcard.term}</p>
                     <p className="text-sm absolute top-2 left-2 text-gray-400 dark:text-neutral-700">
                       card front
                     </p>
                   </div>
                 ) : (
-                  <div className="flex flex-col px-8 relative overflow-scroll py-4 items-center sm:text-xl text-md lg:text-3xl h-full justify-center transition-transform duration-500">
+                  <div className="flex flex-col px-8 relative overflow-scroll py-4 items-center sm:text-2xl text-xl lg:text-3xl h-full justify-center transition-transform duration-500">
                     <p>{flashcard.definition}</p>
                     <p className="text-sm absolute top-2 left-2 text-gray-400 dark:text-neutral-700">
                       card back
