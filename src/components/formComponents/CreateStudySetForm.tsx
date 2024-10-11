@@ -123,9 +123,9 @@ export const CreateStudySetForm = () => {
           <div className="flex flex-col gap-5">
             <h1 className="text-2xl font-bold">Flashcards</h1>
             {fields.map((field, index: number) => (
-              <div className="flex flex-col gap-5 rounded-md bg-neutral-100 dark:bg-neutral-900 p-5">
+              <div className="flex flex-col gap-5 border border-neutral-300 dark:border-neutral-600 rounded-md bg-neutral-100 dark:bg-neutral-900 p-5">
                 <div className="flex justify-between items-center">
-                  <h1 className="text-xl font-bold">{index + 1}</h1>
+                  <h1 className="text-2xl font-bold">{index + 1}</h1>
                   <Button
                     type="button"
                     onClick={() => remove(index)}
@@ -135,8 +135,8 @@ export const CreateStudySetForm = () => {
                     <Trash className="w-4" />
                   </Button>
                 </div>
-                <hr className="border-gray-500 mb-2" />
-                <div key={field.id} className="flex gap-4 items-end ">
+                {/* <hr className="border-gray-500 w-[300px] mb-2" /> */}
+                <div key={field.id} className="sm:flex-row gap-4 items-end ">
                   <FormField
                     control={form.control}
                     name={`flashCards.${index}.term`}
