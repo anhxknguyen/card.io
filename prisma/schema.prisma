@@ -44,8 +44,8 @@ model StudySet {
 
 model Flashcard {
   id         String   @id @default(uuid())
-  term       String
-  definition String
+  term       String   @db.Text
+  definition String   @db.Text
   studySet   StudySet @relation("StudySetFlashcards", fields: [studySetId], references: [id], onDelete: Cascade)
   studySetId String
   createdAt  DateTime @default(now())

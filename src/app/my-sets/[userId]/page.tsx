@@ -8,10 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
-import { User } from "../../../../types/User";
+import { User } from "@/types/User";
 import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
-import { StudySet } from "../../../../types/StudySet";
+import { StudySet } from "@/types/StudySet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import CreateSetButton from "@/components/buttonComponents/CreateSetButton";
 import { truncateDescription } from "@/utils/truncateDescription";

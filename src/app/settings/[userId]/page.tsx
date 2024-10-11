@@ -1,9 +1,9 @@
 import ChangeUsernameForm from "@/components/formComponents/ChangeUsernameForm";
 import prisma from "@/lib/prisma";
-import { User } from "../../../../types/User";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
+import { User } from "@/types/User";
 
 const UserSettings = async ({ params }: { params: { userId: string } }) => {
   //Gets user data based on auth session

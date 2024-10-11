@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -75,7 +74,7 @@ export const CreateStudySetForm = () => {
             router.push(`/my-sets/${user?.id}`);
           })}
         >
-          <div className="flex flex-col sm:flex-row gap-10 items-center sticky top-0 py-8 bg-[#FFFFFF] dark:bg-[#121212] border-b border-border dark:border-white">
+          <div className="flex flex-col md:flex-row gap-10 items-start md:items-center sticky top-0 py-8 bg-[#FFFFFF] dark:bg-[#121212] border-b border-border dark:border-white">
             <Button
               type="button"
               variant={"ghost"}
@@ -85,15 +84,19 @@ export const CreateStudySetForm = () => {
             >
               <ChevronLeft className="w-6" />
             </Button>
-            <h1 className="text-3xl font-bold">Create a Study Set</h1>
-            <Button type="submit">Create</Button>
+            <div className="flex gap-6">
+              <h1 className="text-2xl sm:text-3xl font-bold">
+                Create a Study Set
+              </h1>
+              <Button type="submit">Create</Button>
+            </div>
           </div>
           <div className="flex flex-col gap-5 mt-5">
             <FormField
               control={form.control}
               name="title"
               render={({ field }: { field: any }) => (
-                <FormItem className="xl:w-[700px]">
+                <FormItem className="xl:w-1/2">
                   <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input placeholder="Title of your study set" {...field} />
@@ -106,7 +109,7 @@ export const CreateStudySetForm = () => {
               control={form.control}
               name="description"
               render={({ field }: { field: any }) => (
-                <FormItem className="xl:w-[700px]">
+                <FormItem className="xl:w-1/2">
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
@@ -135,8 +138,10 @@ export const CreateStudySetForm = () => {
                     <Trash className="w-4" />
                   </Button>
                 </div>
-                {/* <hr className="border-gray-500 w-[300px] mb-2" /> */}
-                <div key={field.id} className="sm:flex-row gap-4 items-end ">
+                <div
+                  key={field.id}
+                  className="md:flex-row md:flex gap-4 items-end "
+                >
                   <FormField
                     control={form.control}
                     name={`flashCards.${index}.term`}

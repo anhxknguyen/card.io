@@ -28,7 +28,7 @@ export default function RootLayout({
         >
           <SessionProvider>
             <Navbar />
-            <div className="sm:px-24 grow flex justify-center py-5">
+            <div className="md:px-24 sm:px-12 px-4 grow flex justify-center py-5">
               {children}
             </div>
             <Footer />
