@@ -23,7 +23,6 @@ export function ModeToggle({ label }: { label?: string }) {
             <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0  dark:rotate-0 dark:scale-100" />
             {label && <span>{label}</span>}
           </div>
-
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

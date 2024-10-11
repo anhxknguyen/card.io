@@ -14,6 +14,7 @@ import { redirect } from "next/navigation";
 import { StudySet } from "../../../../types/StudySet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import CreateSetButton from "@/components/buttonComponents/CreateSetButton";
+import { truncateDescription } from "@/utils/truncateDescription";
 
 const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
   //Gets user data based on auth session
@@ -55,16 +56,6 @@ const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
   }
 
   const studySets: StudySet[] = urlUser.studySets;
-  // await prisma.studySet.create({
-  //   data: {
-  //     title: "JPNS 101",
-  //     user: {
-  //       connect: {
-  //         id: sessionUser.id,
-  //       },
-  //     },
-  //   },
-  // });
 
   return (
     <div className="w-full flex flex-col gap-5 px-8 sm:px-0">
@@ -75,37 +66,48 @@ const StudySetsPage = async ({ params }: { params: { userId: string } }) => {
         </div>
         <p className="text-gray-500">Create, edit, and delete study sets</p>
       </header>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 ">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-[1fr]">
         {studySets.map((studySet) => (
-          <Card key={studySet.id} className="bg-secondary h-48 relative group">
-            <div
-              className="absolute top-0 left-0 h-full rounded-l-xl w-2 bg-transparent group-hover:bg-red-500"
-              aria-hidden="true"
-            ></div>
-            <CardHeader>
-              <CardTitle className="text-xl">{studySet.title}</CardTitle>
-              <CardDescription>
-                {studySet.flashcards.length} flashcards
-              </CardDescription>
-            </CardHeader>
-            <CardContent>{""}</CardContent>
-            <CardFooter className="flex justify-between">
-              <CardDescription className="flex items-center gap-2">
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-gray-200 dark:bg-gray-500 dark:text-gray-200">
-                    {studySet.user?.username
-                      ?.split(" ")
-                      .map((name) => name[0]) ||
-                      studySet.user?.name?.split(" ").map((name) => name[0])}
-                  </AvatarFallback>
-                </Avatar>
-                {studySet.user.username}
-              </CardDescription>
-              <CardDescription className="text-sm">
-                Updated {new Date(studySet.updatedAt).toLocaleDateString()}
-              </CardDescription>
-            </CardFooter>
-          </Card>
+          <div className="flex flex-col">
+            <Card
+              key={studySet.id}
+              className="bg-secondary h-full relative group"
+            >
+              <div
+                className="absolute top-0 left-0 h-full rounded-l-xl w-2 bg-transparent group-hover:bg-red-500"
+                aria-hidden="true"
+              ></div>
+              <CardHeader>
+                <CardTitle className="text-xl">{studySet.title}</CardTitle>
+                <CardDescription>
+                  {studySet.flashcards.length} flashcards
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {studySet.description ? (
+                  truncateDescription(studySet.description)
+                ) : (
+                  <br />
+                )}
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <CardDescription className="flex items-center gap-2">
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback className="bg-gray-200 dark:bg-gray-500 dark:text-gray-200">
+                      {studySet.user?.username
+                        ?.split(" ")
+                        .map((name) => name[0]) ||
+                        studySet.user?.name?.split(" ").map((name) => name[0])}
+                    </AvatarFallback>
+                  </Avatar>
+                  {studySet.user.username}
+                </CardDescription>
+                <CardDescription className="text-sm">
+                  Updated {new Date(studySet.updatedAt).toLocaleDateString()}
+                </CardDescription>
+              </CardFooter>
+            </Card>
+          </div>
         ))}
       </div>
     </div>

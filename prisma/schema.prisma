@@ -34,7 +34,7 @@ model StudySet {
   title       String
   isPublic    Boolean     @default(false)
   description String?     @db.Text
-  user        User        @relation("UserStudySets", fields: [userId], references: [id])
+  user        User        @relation("UserStudySets", fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   flashcards  Flashcard[] @relation("StudySetFlashcards")
   createdAt   DateTime    @default(now())
@@ -46,7 +46,7 @@ model Flashcard {
   id         String   @id @default(uuid())
   term       String
   definition String
-  studySet   StudySet @relation("StudySetFlashcards", fields: [studySetId], references: [id])
+  studySet   StudySet @relation("StudySetFlashcards", fields: [studySetId], references: [id], onDelete: Cascade)
   studySetId String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

@@ -1,10 +1,21 @@
+"use client";
 import React from "react";
 import { Button } from "./ui/button";
 import { Sticker } from "lucide-react";
 import { Linkedin, FileUser } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/create-set"
+  ) {
+    return null;
+  }
+
   return (
     <div className="border-t dark:border-none dark:bg-navbar bg-zinc-50  px-6">
       <div className="h-24 max-w-screen-2xl mx-auto text-sm flex items-center justify-center">

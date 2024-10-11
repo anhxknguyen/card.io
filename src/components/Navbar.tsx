@@ -13,9 +13,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ModeToggle } from "./ModeToggle";
 import CreateSetButton from "./buttonComponents/CreateSetButton";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   // Get the current session
@@ -23,9 +24,18 @@ const Navbar = () => {
   const user = session?.user;
   const router = useRouter();
 
+  const pathname = usePathname();
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/create-set"
+  ) {
+    return null;
+  }
+
   return (
     <div
-      className={`sticky top-0 left-0 w-full z-50 border-b dark:border-none dark:bg-navbar bg-zinc-50`}
+      className={` top-0 left-0 w-full z-50 border-b dark:border-none dark:bg-navbar bg-zinc-50 sticky`}
     >
       <div className="h-16 max-w-screen-2xl mx-auto flex items-center px-6 justify-between">
         <Link className="font-bold text-lg hover:text-primary" href="/">
@@ -33,9 +43,7 @@ const Navbar = () => {
         </Link>
         <div className="flex gap-2 items-center">
           {/* Theme Mode Toggle & Create Study Set Button*/}
-          {status === "authenticated" && (
-            <CreateSetButton label="New Study Set" />
-          )}
+          {status === "authenticated" && <CreateSetButton label="" />}
           <ModeToggle />
           {status === "authenticated" ? (
             // AUTHENTICATED USER
