@@ -150,7 +150,14 @@ export const CreateStudySetForm = () => {
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          {
+                            // Show error message if there is an error
+                            form.formState.errors.flashCards?.[index]?.term ? (
+                              <FormMessage />
+                            ) : (
+                              <p className="text-[0.8rem]">&nbsp;</p>
+                            )
+                          }
                         </div>
                       </FormItem>
                     )}
@@ -169,7 +176,15 @@ export const CreateStudySetForm = () => {
                             />
                           </FormControl>
 
-                          <FormMessage />
+                          {
+                            // Show error message if there is an error
+                            form.formState.errors.flashCards?.[index]
+                              ?.definition ? (
+                              <FormMessage />
+                            ) : (
+                              <p className="text-[0.8rem]">&nbsp;</p>
+                            )
+                          }
                         </div>
                       </FormItem>
                     )}
